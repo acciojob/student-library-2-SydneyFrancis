@@ -1,5 +1,6 @@
 package com.driver.services;
 
+import com.driver.models.Author;
 import com.driver.models.Book;
 import com.driver.repositories.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,10 @@ public class BookService {
     BookRepository bookRepository2;
 
     public void createBook(Book book){
+        Author author = book.getAuthor();
+        if(author != null){
+            author.getBooksWritten().add(book);
+        }
         bookRepository2.save(book);
     }
 

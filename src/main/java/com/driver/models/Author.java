@@ -1,8 +1,10 @@
 package com.driver.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.*;
+import org.junit.Ignore;
 
 import javax.persistence.*;
 import java.util.List;
