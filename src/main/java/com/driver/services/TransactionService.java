@@ -75,6 +75,7 @@ public class TransactionService {
                     .build();
 
             book.setAvailable(false);
+            bookRepository5.updateBook(book);
             if (book.getTransactions() == null) {
                 ArrayList<Transaction> transactions = new ArrayList<>();
                 transactions.add(transaction);
@@ -97,7 +98,6 @@ public class TransactionService {
         List<Transaction> transactions = transactionRepository5.find(cardId, bookId, TransactionStatus.SUCCESSFUL, true);
         Transaction transaction = transactions.get(transactions.size() - 1);
         Date date = transaction.getTransactionDate();
-//        System.out.println(date.toString()+"hereee");
         Date curr = new Date();
         long difference_In_Time
                 = curr.getTime() - date.getTime();
@@ -114,6 +114,7 @@ public class TransactionService {
 
         Book book = transaction.getBook();
         book.setAvailable(true);
+        bookRepository5.updateBook(book);
         //for the given transaction calculate the fine amount considering the book has been returned exactly when this function is called
         //make the book available for other users
         //make a new transaction for return book which contains the fine amount as well
