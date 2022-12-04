@@ -14,7 +14,6 @@ import java.util.List;
 @Entity
 @Builder
 @Data
-@AllArgsConstructor
 public class Card {
 
     @Id
@@ -37,6 +36,15 @@ public class Card {
     @OneToMany(mappedBy = "card", cascade = CascadeType.ALL)
     @JsonIgnoreProperties("card")
     private List<Book> books;
+
+    public Card(int id, Student student, Date createdOn, Date updatedOn, CardStatus cardStatus, List<Book> books) {
+        this.id = id;
+        this.student = student;
+        this.createdOn = createdOn;
+        this.updatedOn = updatedOn;
+        this.cardStatus = cardStatus;
+        this.books = books;
+    }
 
     public Card(){
         this.cardStatus = CardStatus.ACTIVATED;

@@ -14,8 +14,6 @@ import java.util.UUID;
 @Entity
 @Builder
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class Transaction {
 
     @Id
@@ -41,6 +39,20 @@ public class Transaction {
 
     @Enumerated(value = EnumType.STRING)
     private TransactionStatus transactionStatus;
+
+    public Transaction(int id, String transactionId, Card card, Book book, int fineAmount, boolean isIssueOperation, TransactionStatus transactionStatus, Date transactionDate) {
+        this.id = id;
+        this.transactionId = transactionId;
+        this.card = card;
+        this.book = book;
+        this.fineAmount = fineAmount;
+        this.isIssueOperation = isIssueOperation;
+        this.transactionStatus = transactionStatus;
+        this.transactionDate = transactionDate;
+    }
+
+    public Transaction() {
+    }
 
     @CreationTimestamp
     private Date transactionDate;
