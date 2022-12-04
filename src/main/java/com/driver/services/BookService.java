@@ -29,17 +29,27 @@ public class BookService {
 
     public List<Book> getBooks(String genre, boolean available, String author){
         List<Book> books = new ArrayList<>();
-        if(genre != null && author == null){
-            books.addAll(bookRepository2.findBooksByGenre(genre,available));
+        if(available){
+            if(genre != null && author != null){
+                books.addAll(bookRepository2.findBooksByGenreAuthor(genre,author,true));
+            }
+            else if(genre != null && author == null){
+                books.addAll(bookRepository2.findBooksByGenre(genre,true));
+            }
+            else{
+                books.addAll(bookRepository2.findBooksByAuthor(author,true));
+            }
         }
-        if(author != null && genre == null){
-            books.addAll(bookRepository2.findBooksByAuthor(author,available));
-        }
-        if(author != null && genre != null){
-            books.addAll(bookRepository2.findBooksByGenreAuthor(genre,author,available));
-        }
-        if(author == null && genre == null){
-            books.addAll(bookRepository2.findByAvailability(false));
+        else{
+            if(genre != null && author != null){
+                books.addAll(bookRepository2.findBooksByGenreAuthor(genre,author,false));
+            }
+            else if(genre != null && author == null){
+                books.addAll(bookRepository2.findBooksByGenre(genre,false));
+            }
+            else{
+                books.addAll(bookRepository2.findBooksByAuthor(author,false));
+            }
         }
         return  books;
     }
