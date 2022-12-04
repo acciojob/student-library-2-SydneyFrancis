@@ -1,9 +1,6 @@
 package com.driver.services;
 
-import com.driver.models.Book;
-import com.driver.models.Card;
-import com.driver.models.Transaction;
-import com.driver.models.TransactionStatus;
+import com.driver.models.*;
 import com.driver.repositories.BookRepository;
 import com.driver.repositories.CardRepository;
 import com.driver.repositories.TransactionRepository;
@@ -52,10 +49,10 @@ public class TransactionService {
 
         Card card = cardRepository5.findById(cardId).get();
         Book book = bookRepository5.findById(bookId).get();
-        if(book == null){
+        if(!book.isAvailable()){
             throw new Exception("Book is either unavailable or not present");
         }
-        else if(card == null){
+        else if(card != null && card.getCardStatus().equals(CardStatus.DEACTIVATED)){
             throw new Exception("Card is invalid");
         }
         else if(card.getBooks().size()>=max_allowed_books){
