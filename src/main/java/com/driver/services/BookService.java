@@ -39,7 +39,7 @@ public class BookService {
             books.addAll(bookRepository2.findBooksByGenreAuthor(genre,author,available));
         }
         if(author == null && genre == null){
-            books.addAll(bookRepository2.findByAvailability(available));
+            books.addAll(bookRepository2.findByAvailability(false));
         }
         return  books;
     }
