@@ -36,8 +36,11 @@ public class BookService {
             else if(genre != null && author == null){
                 books.addAll(bookRepository2.findBooksByGenre(genre,true));
             }
-            else{
+            else if(genre == null && author != null){
                 books.addAll(bookRepository2.findBooksByAuthor(author,true));
+            }
+            else {
+                books.addAll(bookRepository2.findByAvailability(true));
             }
         }
         else{
@@ -47,8 +50,11 @@ public class BookService {
             else if(genre != null && author == null){
                 books.addAll(bookRepository2.findBooksByGenre(genre,false));
             }
-            else{
+            else if(genre == null && author != null){
                 books.addAll(bookRepository2.findBooksByAuthor(author,false));
+            }
+            else{
+                books.addAll(bookRepository2.findByAvailability(false));
             }
         }
         return  books;
