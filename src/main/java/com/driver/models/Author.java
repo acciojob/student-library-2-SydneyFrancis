@@ -10,7 +10,6 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@AllArgsConstructor
 @Data
 public class Author {
 
