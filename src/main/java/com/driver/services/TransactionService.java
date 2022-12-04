@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -73,7 +74,14 @@ public class TransactionService {
                     .build();
 
             book.setAvailable(false);
-            book.getTransactions().add(transaction);
+            if (book.getTransactions() == null) {
+                ArrayList<Transaction> transactions = new ArrayList<>();
+                transactions.add(transaction);
+                book.setTransactions(transactions);
+            }
+            else{
+                book.getTransactions().add(transaction);
+            }
 
             transactionRepository5.save(transaction);
 
