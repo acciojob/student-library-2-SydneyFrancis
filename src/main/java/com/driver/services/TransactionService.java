@@ -51,10 +51,10 @@ public class TransactionService {
         Card card = cardRepository5.findById(cardId).get();
         Book book = bookRepository5.findById(bookId).get();
 
-        if(book == null || book.isAvailable() == false){
+        if(book == null && book.isAvailable() == false){
             throw new Exception("Book is either unavailable or not present");
         }
-        else if(card == null || card.getCardStatus().equals(CardStatus.DEACTIVATED)){
+        else if(card == null && card.getCardStatus().equals(CardStatus.DEACTIVATED)){
             throw new Exception("Card is invalid");
         }
         else if(card.getBooks().size()>=max_allowed_books){
