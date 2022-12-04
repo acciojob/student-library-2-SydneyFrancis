@@ -62,7 +62,14 @@ public class TransactionService {
         }
         else{
             book.setCard(card);
-            card.getBooks().add(book);
+            if(card.getBooks().size()==0){
+                List<Book> books = new ArrayList<>();
+                books.add(book);
+                card.setBooks(books);
+            }
+            else{
+                card.getBooks().add(book);
+            }
 
 
             Transaction transaction = Transaction.builder()
@@ -76,7 +83,7 @@ public class TransactionService {
 
             book.setAvailable(false);
             bookRepository5.updateBook(book);
-            if (book.getTransactions() == null) {
+            if (book.getTransactions().size() == 0) {
                 ArrayList<Transaction> transactions = new ArrayList<>();
                 transactions.add(transaction);
                 book.setTransactions(transactions);
